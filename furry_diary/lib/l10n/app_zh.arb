@@ -1,0 +1,90 @@
+{
+  "@@locale": "zh",
+  "appTitle": "毛孩子日记",
+  "tabHome": "首页",
+  "tabProfiles": "档案",
+  "tabRecords": "记录",
+  "tabMine": "我的",
+  "petProfilesTitle": "宠物档案",
+  "addPet": "添加宠物",
+  "petName": "名字",
+  "petSpecies": "物种 (如猫、狗)",
+  "petBreed": "品种",
+  "petBirthDate": "出生日期 (YYYY-MM-DD)",
+  "petWeight": "体重 (kg)",
+  "cancel": "取消",
+  "save": "保存",
+  "delete": "删除",
+  "deleteConfirm": "确定要删除这个宠物档案吗？",
+  "noPets": "还没有添加宠物，点击右下角添加吧！",
+  "selectAvatar": "选择头像",
+  "camera": "拍照",
+  "gallery": "相册",
+  "settingsTitle": "设置",
+  "language": "语言",
+  "theme": "主题",
+  "about": "关于",
+  "homeTitle": "首页",
+  "welcome": "欢迎来到毛孩子日记",
+  "moreFeatures": "更多功能开发中...",
+  "healthRecordsTitle": "健康记录",
+  "noRecords": "暂无记录",
+  "languageChinese": "中文",
+  "languageEnglish": "English",
+  "settingsTitle": "我的与设置",
+  "accountStatus": "账号状态",
+  "proUser": "Pro 用户",
+  "freeUser": "免费用户",
+  "upgradePro": "升级 Pro",
+  "upgradeProDesc": "解锁无限记录、更多提醒自定义能力",
+  "privacySettings": "隐私设置",
+  "notificationSettings": "通知设置",
+  "petGender": "性别",
+  "editPet": "编辑宠物",
+  "addPetDesc": "还没有宠物档案，点击右下角添加",
+  "petBreedLabel": "品种: {breed}",
+  "@petBreedLabel": {
+    "placeholders": {
+      "breed": {
+        "type": "String"
+      }
+    }
+  },
+  "petGenderLabel": "性别: {gender}",
+  "@petGenderLabel": {
+    "placeholders": {
+      "gender": {
+        "type": "String"
+      }
+    }
+  },
+  "statusUnplanned": "未计划",
+  "statusOverdue": "已逾期",
+  "statusDueSoon": "即将到期",
+  "statusNormal": "正常",
+  "lastRecord": "上次：{date}",
+  "@lastRecord": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "nextReminder": "下次提醒：{date}",
+  "@nextReminder": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "nextReminderUnplanned": "下次提醒：未计划",
+  "typeVaccine": "疫苗",
+  "typeDeworm": "驱虫",
+  "typeCheckup": "体检",
+  "typeMedication": "用药",
+  "typeBath": "洗澡",
+  "typeWeight": "体重",
+  "upcomingReminders": "近期待办提醒",
+  "upcomingNoData": "近期没有需要处理的待办事项哦~"
+}

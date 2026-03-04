@@ -1,0 +1,90 @@
+{
+  "@@locale": "en",
+  "appTitle": "Furry Diary",
+  "tabHome": "Home",
+  "tabProfiles": "Profiles",
+  "tabRecords": "Records",
+  "tabMine": "Mine",
+  "petProfilesTitle": "Pet Profiles",
+  "addPet": "Add Pet",
+  "petName": "Name",
+  "petSpecies": "Species (e.g., Cat, Dog)",
+  "petBreed": "Breed",
+  "petBirthDate": "Birth Date (YYYY-MM-DD)",
+  "petWeight": "Weight (kg)",
+  "cancel": "Cancel",
+  "save": "Save",
+  "delete": "Delete",
+  "deleteConfirm": "Are you sure you want to delete this pet profile?",
+  "noPets": "No pets added yet. Tap the button below to add one!",
+  "selectAvatar": "Select Avatar",
+  "camera": "Camera",
+  "gallery": "Gallery",
+  "settingsTitle": "Settings",
+  "language": "Language",
+  "theme": "Theme",
+  "about": "About",
+  "homeTitle": "Home",
+  "welcome": "Welcome to Furry Diary",
+  "moreFeatures": "More features coming soon...",
+  "healthRecordsTitle": "Health Records",
+  "noRecords": "No records yet",
+  "languageChinese": "中文",
+  "languageEnglish": "English",
+  "settingsTitle": "Mine & Settings",
+  "accountStatus": "Account Status",
+  "proUser": "Pro User",
+  "freeUser": "Free User",
+  "upgradePro": "Upgrade to Pro",
+  "upgradeProDesc": "Unlock unlimited records and more reminder customizations",
+  "privacySettings": "Privacy Settings",
+  "notificationSettings": "Notification Settings",
+  "petGender": "Gender",
+  "editPet": "Edit Pet",
+  "addPetDesc": "No pet profiles yet, tap the bottom right to add",
+  "petBreedLabel": "Breed: {breed}",
+  "@petBreedLabel": {
+    "placeholders": {
+      "breed": {
+        "type": "String"
+      }
+    }
+  },
+  "petGenderLabel": "Gender: {gender}",
+  "@petGenderLabel": {
+    "placeholders": {
+      "gender": {
+        "type": "String"
+      }
+    }
+  },
+  "statusUnplanned": "Unplanned",
+  "statusOverdue": "Overdue",
+  "statusDueSoon": "Due Soon",
+  "statusNormal": "Normal",
+  "lastRecord": "Last: {date}",
+  "@lastRecord": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "nextReminder": "Next: {date}",
+  "@nextReminder": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "nextReminderUnplanned": "Next: Unplanned",
+  "typeVaccine": "Vaccine",
+  "typeDeworm": "Deworm",
+  "typeCheckup": "Checkup",
+  "typeMedication": "Medication",
+  "typeBath": "Bath",
+  "typeWeight": "Weight",
+  "upcomingReminders": "Upcoming Reminders",
+  "upcomingNoData": "No upcoming reminders at the moment."
+}

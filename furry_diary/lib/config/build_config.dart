@@ -1,21 +1,17 @@
-enum AccountMode {
-  localOnly,
-  cloud,
-}
-
 class BuildConfig {
-  static const String _rawMode =
-      String.fromEnvironment('ACCOUNT_MODE', defaultValue: 'local');
+  static const String apiBaseUrl =
+      String.fromEnvironment('API_BASE_URL', defaultValue: 'https://api.example.com');
 
-  static AccountMode get accountMode {
-    switch (_rawMode) {
-      case 'cloud':
-        return AccountMode.cloud;
-      case 'local':
-      default:
-        return AccountMode.localOnly;
-    }
-  }
+  static const String wechatAppId =
+      String.fromEnvironment('WECHAT_APP_ID', defaultValue: '');
 
-  static bool get isCloudAccountMode => accountMode == AccountMode.cloud;
+  static const String qqAppId =
+      String.fromEnvironment('QQ_APP_ID', defaultValue: '');
+
+  static const int syncIntervalMinutes = 5;
+
+  static const int tokenRefreshThresholdDays = 1;
+
+  static const int maxDevicesForFree = 1;
+  static const int maxDevicesForPro = 3;
 }

@@ -1,19 +1,44 @@
-﻿import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../models/app_models.dart';
 import '../services/local_store.dart';
 import '../services/auth_service.dart';
 import '../services/sync_manager.dart';
+import '../config/build_config.dart';
 
-
-// Create a global dio instance, could configure interceptors here later
 final dioProvider = Provider<Dio>((ref) {
-  final dio = Dio(BaseOptions(baseUrl: 'https://api.example.com'));
+  final dio = Dio(BaseOptions(
+    baseUrl: BuildConfig.apiBaseUrl,
+    connectTimeout: const Duration(seconds: 10),
+    receiveTimeout: const Duration(seconds: 30),
+  ));
+
+  dio.interceptors.add(InterceptorsWrapper(
+    onRequest: (options, handler) async {
+      final storage = FlutterSecureStorage();
+      final token = await storage.read(key: 'auth_token');
+      if (token != null) {
+        options.headers['Authorization'] = 'Bearer $token';
+      }
+      return handler.next(options);
+    },
+    onError: (error, handler) async {
+      if (error.response?.statusCode == 401) {
+        final storage = FlutterSecureStorage();
+        await storage.delete(key: 'auth_token');
+      }
+      return handler.next(error);
+    },
+  ));
+
   return dio;
 });
 
-// Since LocalStore is async initialized in main(), we can use a Provider with an initial crash value, 
-// then override it in ProviderScope. But for simplicity and to match existing patterns:
+final secureStorageProvider = Provider<FlutterSecureStorage>((ref) {
+  return const FlutterSecureStorage();
+});
+
 final localStoreProvider = Provider<LocalStore>((ref) {
   throw UnimplementedError('localStoreProvider not overridden');
 });
@@ -21,52 +46,117 @@ final localStoreProvider = Provider<LocalStore>((ref) {
 final authServiceProvider = Provider<AuthService>((ref) {
   final dio = ref.watch(dioProvider);
   final localStore = ref.watch(localStoreProvider);
-  return AuthService(dio, localStore);
+  final secureStorage = ref.watch(secureStorageProvider);
+  return AuthService(dio, localStore, secureStorage);
 });
 
 class AuthNotifier extends StateNotifier<UserModel?> {
-  AuthNotifier(this._authService, this._localStore) : super(_localStore.getCurrentUser());
+  AuthNotifier(this._authService, this._localStore, this._syncManager)
+      : super(_localStore.getCurrentUser());
 
   final AuthService _authService;
   final LocalStore _localStore;
+  final SyncManager _syncManager;
 
-  Future<void> login(String phone, String code) async {
-    // In a real app we'd call the backend
+  Future<LoginResult?> loginByPhone(String phone, String code,
+      {String? deviceId, String? deviceName}) async {
     try {
-      final user = await _authService.loginByPhone(phone: phone, code: code);
-      state = user;
-    } catch (e) {
-      // Fallback local mock for now to test UI
-      final mockUser = UserModel(
-        id: 'user-mock-123',
-        isGuest: false,
-        isPro: false,
+      final result = await _authService.loginByPhone(
         phone: phone,
-        nickname: '铲屎官' + phone.substring(phone.length - 4),
-        token: 'mock_token_123',
+        code: code,
+        deviceId: deviceId,
+        deviceName: deviceName,
       );
-      await _localStore.saveUser(mockUser);
-      state = mockUser;
+      state = result.user;
+      await _syncManager.mergeGuestDataAfterLogin();
+      return result;
+    } catch (e) {
+      rethrow;
     }
   }
 
-  Future<void> logout() async {
-    await _localStore.clearUser();
-    // revert to guest mode
-    final guest = await _authService.enterGuestMode();
-    state = guest;
+  Future<LoginResult?> loginByWechat(String code,
+      {String? deviceId, String? deviceName}) async {
+    try {
+      final result = await _authService.loginByWechat(
+        code: code,
+        deviceId: deviceId,
+        deviceName: deviceName,
+      );
+      state = result.user;
+      await _syncManager.mergeGuestDataAfterLogin();
+      return result;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<LoginResult?> loginByQQ(String accessToken, String openId,
+      {String? deviceId, String? deviceName}) async {
+    try {
+      final result = await _authService.loginByQQ(
+        accessToken: accessToken,
+        openId: openId,
+        deviceId: deviceId,
+        deviceName: deviceName,
+      );
+      state = result.user;
+      await _syncManager.mergeGuestDataAfterLogin();
+      return result;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> bindPhone(String phone, String code) async {
+    await _authService.bindPhone(phone: phone, code: code);
+    final user = _localStore.getCurrentUser();
+    if (user != null) {
+      state = user.copyWith(phone: phone);
+    }
+  }
+
+  Future<void> updateProfile({String? nickname, String? avatarUrl, String? email}) async {
+    final user = await _authService.updateProfile(
+      nickname: nickname,
+      avatarUrl: avatarUrl,
+      email: email,
+    );
+    state = user;
+  }
+
+  Future<void> logout({String? deviceId}) async {
+    await _authService.logout(deviceId: deviceId);
+    state = null;
+  }
+
+  Future<void> deleteAccount() async {
+    await _authService.deleteAccount();
+    state = null;
+  }
+
+  Future<void> refreshProfile() async {
+    final user = await _authService.fetchProfile();
+    if (user != null) {
+      state = user;
+    }
   }
 }
 
 final authProvider = StateNotifierProvider<AuthNotifier, UserModel?>((ref) {
   final authService = ref.watch(authServiceProvider);
   final localStore = ref.watch(localStoreProvider);
-  return AuthNotifier(authService, localStore);
+  final syncManager = ref.watch(syncManagerProvider);
+  return AuthNotifier(authService, localStore, syncManager);
 });
-
 
 final syncManagerProvider = Provider<SyncManager>((ref) {
   final dio = ref.watch(dioProvider);
   final localStore = ref.watch(localStoreProvider);
   return SyncManager(dio, localStore);
+});
+
+final isAuthenticatedProvider = Provider<bool>((ref) {
+  final user = ref.watch(authProvider);
+  return user != null && !user.isGuest;
 });

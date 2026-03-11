@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import '../l10n/generated/app_localizations.dart';
-import '../config/build_config.dart';
 import '../providers/locale_provider.dart';
 import '../providers/auth_provider.dart';
-import '../providers/build_config_provider.dart';
 import '../navigation/pro_upgrade_flow.dart';
 import '../services/local_store.dart';
 import 'login_page.dart';
 import 'backup_restore_page.dart';
+import 'profile_page.dart';
+import 'devices_page.dart';
 
 class SettingsPage extends ConsumerStatefulWidget {
   const SettingsPage({
@@ -272,8 +272,6 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
             context,
             children: [
               Consumer(builder: (context, ref, child) {
-                final accountMode = ref.watch(accountModeProvider);
-                final isLocalMode = accountMode == AccountMode.localOnly;
                 final user = ref.watch(authProvider);
                 final isGuest = user?.isGuest ?? true;
 
@@ -295,30 +293,21 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
                             : null,
                   ),
                   title: Text(
-                    isLocalMode
-                        ? l10n.freeUser
-                        : (isGuest
-                            ? '点击登录/注册'
-                            : (user?.nickname ?? user?.phone ?? '未知用户')),
+                    isGuest
+                        ? '点击登录/注册'
+                        : (user?.nickname ?? user?.phone ?? '未知用户'),
                     style: theme.textTheme.titleLarge
                         ?.copyWith(fontWeight: FontWeight.bold),
                   ),
                   subtitle: Text(
-                    isLocalMode
-                        ? '本地模式下不提供登录/注册与云端同步'
-                        : (isGuest
-                            ? '登录后可云端同步数据，防丢失'
-                            : (user?.isPro == true
-                                ? l10n.proUser
-                                : l10n.freeUser)),
+                    isGuest
+                        ? '登录后可云端同步数据，防丢失'
+                        : (user?.isPro == true
+                            ? l10n.proUser
+                            : l10n.freeUser),
                   ),
-                  trailing:
-                      isLocalMode ? null : const Icon(Icons.chevron_right),
+                  trailing: const Icon(Icons.chevron_right),
                   onTap: () {
-                    if (isLocalMode) {
-                      return;
-                    }
-
                     if (isGuest) {
                       Navigator.push(
                         context,
@@ -326,14 +315,18 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
                           builder: (context) => Consumer(
                             builder: (ctx, r, _) => LoginPage(
                               authService: r.watch(authServiceProvider),
-                              syncManager: r.watch(
-                                  syncManagerProvider), // Fix for missing named param
+                              syncManager: r.watch(syncManagerProvider),
                             ),
                           ),
                         ),
                       );
                     } else {
-                      // 跳转到个人资料页面 (TBD)
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ProfilePage(),
+                        ),
+                      );
                     }
                   },
                 );
@@ -372,6 +365,20 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
                     subtitle: const Text('上次同步：刚刚'),
                     trailing: const Icon(Icons.chevron_right),
                     onTap: () {},
+                  ),
+                  const Divider(height: 1),
+                  ListTile(
+                    leading: const Icon(Icons.devices),
+                    title: const Text('设备管理'),
+                    trailing: const Icon(Icons.chevron_right),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const DevicesPage(),
+                        ),
+                      );
+                    },
                   ),
                   const Divider(height: 1),
                   ListTile(
@@ -445,7 +452,7 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
                   onChanged: (String? newValue) {
                     if (newValue != null) {
                       ref.read(localeProvider.notifier).state = Locale(
-                          newValue); // using .state = which is more common
+                          newValue);
                     }
                   },
                 ),

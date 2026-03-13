@@ -86,5 +86,168 @@
   "typeBath": "Bath",
   "typeWeight": "Weight",
   "upcomingReminders": "Upcoming Reminders",
-  "upcomingNoData": "No upcoming reminders at the moment."
+  "upcomingNoData": "No upcoming reminders at the moment.",
+  "estrus": "Estrus",
+  "estrusRecord": "Estrus Record",
+  "estrusCalendar": "Estrus Calendar",
+  "estrusPrediction": "Cycle Prediction",
+  "estrusStartDate": "Start Date",
+  "estrusEndDate": "End Date",
+  "estrusDurationDays": "Duration",
+  "estrusNextPrediction": "Next Predicted Estrus",
+  "estrusDaysUntilNext": "{days} days until next",
+  "@estrusDaysUntilNext": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "estrusBehaviorChanges": "Behavior Changes",
+  "estrusSymptoms": "Symptoms",
+  "estrusDischargeColor": "Discharge Color",
+  "estrusDischargeAmount": "Discharge Amount",
+  "estrusVulvaSwelling": "Vulva Swelling",
+  "estrusProestrus": "Proestrus",
+  "estrusEstrus": "Estrus",
+  "estrusDiestrus": "Diestrus",
+  "estrusAnestrus": "Anestrus",
+  "estrusPredictionConfidenceLow": "Insufficient data, low prediction accuracy",
+  "estrusPredictionConfidenceMedium": "Medium prediction accuracy",
+  "estrusPredictionConfidenceHigh": "High prediction accuracy",
+  "estrusReminder": "Estrus Reminder",
+  "estrusComingSoon": "{petName}'s estrus is expected in {days} days",
+  "@estrusComingSoon": {
+    "placeholders": {
+      "petName": {
+        "type": "String"
+      },
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "estrusStarted": "{petName}'s estrus is expected to start today",
+  "@estrusStarted": {
+    "placeholders": {
+      "petName": {
+        "type": "String"
+      }
+    }
+  },
+  "estrusShouldEnd": "{petName}'s estrus should have ended",
+  "@estrusShouldEnd": {
+    "placeholders": {
+      "petName": {
+        "type": "String"
+      }
+    }
+  },
+  "estrusOverdue": "{petName}'s estrus is overdue",
+  "@estrusOverdue": {
+    "placeholders": {
+      "petName": {
+        "type": "String"
+      }
+    }
+  },
+  "estrusFirstRecordTitle": "Record Estrus",
+  "estrusFirstRecordQuestion": "Is this {petName}'s first estrus?",
+  "@estrusFirstRecordQuestion": {
+    "placeholders": {
+      "petName": {
+        "type": "String"
+      }
+    }
+  },
+  "estrusFirstTimeOption": "Yes, this is the first time",
+  "estrusFirstTimeHint": "Will predict based on average cycle",
+  "estrusNotFirstTimeOption": "No, had estrus before",
+  "estrusNotFirstTimeHint": "Can add historical records to improve accuracy",
+  "estrusHistoryInputTitle": "Add Historical Records",
+  "estrusHistoryInputHint": "Can add up to 3 historical records",
+  "estrusAddMoreRecords": "Add more records",
+  "estrusSkipAndContinue": "Skip",
+  "estrusSaveAndContinue": "Save and Continue",
+  "estrusPredictionBasisDefault": "Based on average cycle",
+  "estrusPredictionBasisHistorical": "Based on historical records",
+  "estrusPredictionAccuracyLow": "Low accuracy",
+  "estrusContinueRecordingHint": "Continue recording to improve prediction accuracy",
+  "estrusRecordSaved": "Estrus recorded",
+  "estrusKnowledgeTitle": "Estrus Knowledge Class",
+  "estrusHowToIdentify": "How to identify estrus?",
+  "estrusSwellingRedness": "Vulva swelling and redness",
+  "estrusBloodyDischarge": "Bloody discharge",
+  "estrusBehaviorChangesHint": "Behavior changes (e.g., frequent licking)",
+  "estrusTipsTitle": "Tips:",
+  "estrusRecordDates": "Record start and end dates",
+  "estrusObserveDischarge": "Observe discharge color and amount",
+  "estrusKeepClean": "Keep clean to avoid infection",
+  "estrusSkip": "Skip",
+  "estrusStartRecording": "Start Recording",
+  "estrusAbnormalTitle": "Abnormal Mark",
+  "estrusAbnormalReasons": "Abnormal Reasons",
+  "estrusProFeature": "Pro Exclusive Feature",
+  "estrusCloudBackup": "Cloud Backup & Restore",
+  "estrusNoRecords": "No estrus records yet",
+  "estrusAddRecord": "Add Record",
+  "estrusEditRecord": "Edit Record",
+  "estrusDeleteRecord": "Delete Record",
+  "estrusDeleteConfirm": "Are you sure you want to delete this estrus record?",
+  "estrusDays": "{days} days",
+  "@estrusDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "estrusPhase": "Phase",
+  "estrusNote": "Note",
+  "estrusLight": "Light",
+  "estrusModerate": "Moderate",
+  "estrusHeavy": "Heavy",
+  "estrusSwellingNone": "None",
+  "estrusSwellingMild": "Mild",
+  "estrusSwellingModerate": "Moderate",
+  "estrusSwellingSevere": "Severe",
+  "estrusColorPink": "Pink",
+  "estrusColorBrightRed": "Bright Red",
+  "estrusColorDarkRed": "Dark Red",
+  "estrusColorLightYellow": "Light Yellow",
+  "estrusColorTransparent": "Transparent",
+  "estrusBehaviorRestless": "Restless",
+  "estrusBehaviorDepressed": "Depressed",
+  "estrusBehaviorClingy": "More Clingy",
+  "estrusBehaviorAppetiteLoss": "Appetite Loss",
+  "estrusBehaviorFrequentUrination": "Frequent Urination",
+  "estrusBehaviorLicking": "Licking Vulva",
+  "estrusBehaviorSeekingMate": "Seeking Mate",
+  "estrusBehaviorAggressive": "More Aggressive",
+  "estrusBehaviorLessActive": "Less Active",
+  "estrusBehaviorOther": "Other",
+  "estrusSymptomSwelling": "Vulva Swelling",
+  "estrusSymptomBreastEnlargement": "Breast Enlargement",
+  "estrusSymptomFever": "Fever",
+  "estrusSymptomIncreasedThirst": "Increased Thirst",
+  "estrusSymptomOther": "Other",
+  "estrusStatsTitle": "Estrus Statistics",
+  "estrusCycleTrend": "Cycle Length Trend",
+  "estrusDurationDistribution": "Duration Distribution",
+  "estrusSymptomStats": "Symptom Statistics",
+  "estrusAverageCycle": "Average Cycle",
+  "estrusAverageDuration": "Average Duration",
+  "estrusTotalRecords": "Total Records: {count}",
+  "@estrusTotalRecords": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "estrusInProgress": "In Progress",
+  "estrusEnded": "Ended",
+  "estrusPredicted": "Predicted",
+  "estrusOnlyFemalePets": "Only for female pets",
+  "estrusOnlyUnspayedPets": "Only for unspayed pets"
 }

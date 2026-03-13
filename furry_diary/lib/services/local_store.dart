@@ -32,6 +32,7 @@ class LocalStore {
   static const String recordsBoxName = 'records_box';
   static const String syncBoxName = 'sync_box';
   static const String petsBoxName = 'pets_box';
+  static const String estrusBoxName = 'estrus_box';
 
   Future<void> init() async {
     await Hive.initFlutter();
@@ -39,6 +40,7 @@ class LocalStore {
     await Hive.openBox<Map>(recordsBoxName);
     await Hive.openBox<String>(syncBoxName);
     await Hive.openBox<Map>(petsBoxName);
+    await Hive.openBox<Map>(estrusBoxName);
   }
 
   Future<void> saveUser(UserModel user) async {
@@ -257,5 +259,44 @@ class LocalStore {
     }
 
     notifyDataChanged();
+  }
+
+  List<EstrusRecord> allEstrusRecords() {
+    final box = Hive.box<Map>(estrusBoxName);
+    return box.values
+        .map((value) => EstrusRecord.fromJson(Map<String, dynamic>.from(value)))
+        .toList()
+      ..sort((a, b) => b.startDate.compareTo(a.startDate));
+  }
+
+  List<EstrusRecord> estrusRecordsByPet(String petId) {
+    return allEstrusRecords().where((record) => record.petId == petId).toList();
+  }
+
+  Future<void> upsertEstrusRecord(EstrusRecord record) async {
+    final box = Hive.box<Map>(estrusBoxName);
+    await box.put(record.id, record.toJson());
+    notifyDataChanged();
+  }
+
+  Future<void> upsertEstrusRecords(List<EstrusRecord> records) async {
+    final box = Hive.box<Map>(estrusBoxName);
+    for (final record in records) {
+      await box.put(record.id, record.toJson());
+    }
+    notifyDataChanged();
+  }
+
+  Future<void> deleteEstrusRecord(String recordId) async {
+    final box = Hive.box<Map>(estrusBoxName);
+    await box.delete(recordId);
+    notifyDataChanged();
+  }
+
+  EstrusRecord? getEstrusRecord(String recordId) {
+    final box = Hive.box<Map>(estrusBoxName);
+    final raw = box.get(recordId);
+    if (raw == null) return null;
+    return EstrusRecord.fromJson(Map<String, dynamic>.from(raw));
   }
 }

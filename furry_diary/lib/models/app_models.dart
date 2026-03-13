@@ -372,3 +372,248 @@ class Device {
         'is_current': isCurrent,
       };
 }
+
+enum EstrusPhase {
+  proestrus,
+  estrus,
+  diestrus,
+  anestrus,
+}
+
+enum DischargeAmount {
+  light,
+  moderate,
+  heavy,
+}
+
+enum SwellingLevel {
+  none,
+  mild,
+  moderate,
+  severe,
+}
+
+enum PredictionBasis {
+  defaultValue,
+  historicalData,
+}
+
+enum PredictionConfidence {
+  low,
+  medium,
+  high,
+}
+
+class EstrusRecord {
+  EstrusRecord({
+    required this.id,
+    required this.petId,
+    required this.startDate,
+    this.endDate,
+    this.durationDays,
+    this.phase,
+    this.dischargeColor,
+    this.dischargeAmount,
+    this.vulvaSwelling,
+    this.behaviorChanges = const [],
+    this.symptoms = const [],
+    this.note,
+    this.isAbnormal = false,
+    this.abnormalReasons = const [],
+    this.isSynced = false,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  })  : createdAt = createdAt ?? DateTime.now(),
+        updatedAt = updatedAt ?? DateTime.now();
+
+  final String id;
+  final String petId;
+  final DateTime startDate;
+  final DateTime? endDate;
+  final int? durationDays;
+  final EstrusPhase? phase;
+  final String? dischargeColor;
+  final DischargeAmount? dischargeAmount;
+  final SwellingLevel? vulvaSwelling;
+  final List<String> behaviorChanges;
+  final List<String> symptoms;
+  final String? note;
+  final bool isAbnormal;
+  final List<String> abnormalReasons;
+  bool isSynced;
+  final DateTime createdAt;
+  DateTime updatedAt;
+
+  factory EstrusRecord.fromJson(Map<String, dynamic> json) {
+    List<String> parseStringList(dynamic value) {
+      if (value == null) return [];
+      if (value is List) {
+        return value.map((e) => e.toString()).toList();
+      }
+      return [];
+    }
+
+    EstrusPhase? parsePhase(String? value) {
+      if (value == null) return null;
+      return EstrusPhase.values.firstWhere(
+        (e) => e.name == value,
+        orElse: () => EstrusPhase.proestrus,
+      );
+    }
+
+    DischargeAmount? parseDischargeAmount(String? value) {
+      if (value == null) return null;
+      return DischargeAmount.values.firstWhere(
+        (e) => e.name == value,
+        orElse: () => DischargeAmount.moderate,
+      );
+    }
+
+    SwellingLevel? parseSwellingLevel(String? value) {
+      if (value == null) return null;
+      return SwellingLevel.values.firstWhere(
+        (e) => e.name == value,
+        orElse: () => SwellingLevel.none,
+      );
+    }
+
+    return EstrusRecord(
+      id: json['id'] as String,
+      petId: json['petId'] as String? ?? json['pet_id']?.toString() ?? '',
+      startDate: DateTime.parse(json['startDate'] as String? ?? json['start_date'] as String),
+      endDate: json['endDate'] == null && json['end_date'] == null
+          ? null
+          : DateTime.parse(json['endDate'] as String? ?? json['end_date'] as String),
+      durationDays: json['durationDays'] as int? ?? json['duration_days'] as int?,
+      phase: parsePhase(json['phase'] as String?),
+      dischargeColor: json['dischargeColor'] as String? ?? json['discharge_color'] as String?,
+      dischargeAmount: parseDischargeAmount(
+          json['dischargeAmount'] as String? ?? json['discharge_amount'] as String?),
+      vulvaSwelling: parseSwellingLevel(
+          json['vulvaSwelling'] as String? ?? json['vulva_swelling'] as String?),
+      behaviorChanges: parseStringList(json['behaviorChanges'] ?? json['behavior_changes']),
+      symptoms: parseStringList(json['symptoms']),
+      note: json['note'] as String?,
+      isAbnormal: json['isAbnormal'] as bool? ?? json['is_abnormal'] as bool? ?? false,
+      abnormalReasons: parseStringList(json['abnormalReasons'] ?? json['abnormal_reasons']),
+      isSynced: json['isSynced'] as bool? ?? json['is_synced'] as bool? ?? false,
+      createdAt: json['createdAt'] == null && json['created_at'] == null
+          ? null
+          : DateTime.parse(json['createdAt'] as String? ?? json['created_at'] as String),
+      updatedAt: json['updatedAt'] == null && json['updated_at'] == null
+          ? null
+          : DateTime.parse(json['updatedAt'] as String? ?? json['updated_at'] as String),
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'petId': petId,
+        'startDate': startDate.toIso8601String(),
+        'endDate': endDate?.toIso8601String(),
+        'durationDays': durationDays,
+        'phase': phase?.name,
+        'dischargeColor': dischargeColor,
+        'dischargeAmount': dischargeAmount?.name,
+        'vulvaSwelling': vulvaSwelling?.name,
+        'behaviorChanges': behaviorChanges,
+        'symptoms': symptoms,
+        'note': note,
+        'isAbnormal': isAbnormal,
+        'abnormalReasons': abnormalReasons,
+        'isSynced': isSynced,
+        'createdAt': createdAt.toIso8601String(),
+        'updatedAt': updatedAt.toIso8601String(),
+      };
+
+  EstrusRecord copyWith({
+    String? id,
+    String? petId,
+    DateTime? startDate,
+    DateTime? endDate,
+    int? durationDays,
+    EstrusPhase? phase,
+    String? dischargeColor,
+    DischargeAmount? dischargeAmount,
+    SwellingLevel? vulvaSwelling,
+    List<String>? behaviorChanges,
+    List<String>? symptoms,
+    String? note,
+    bool? isAbnormal,
+    List<String>? abnormalReasons,
+    bool? isSynced,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  }) {
+    return EstrusRecord(
+      id: id ?? this.id,
+      petId: petId ?? this.petId,
+      startDate: startDate ?? this.startDate,
+      endDate: endDate ?? this.endDate,
+      durationDays: durationDays ?? this.durationDays,
+      phase: phase ?? this.phase,
+      dischargeColor: dischargeColor ?? this.dischargeColor,
+      dischargeAmount: dischargeAmount ?? this.dischargeAmount,
+      vulvaSwelling: vulvaSwelling ?? this.vulvaSwelling,
+      behaviorChanges: behaviorChanges ?? this.behaviorChanges,
+      symptoms: symptoms ?? this.symptoms,
+      note: note ?? this.note,
+      isAbnormal: isAbnormal ?? this.isAbnormal,
+      abnormalReasons: abnormalReasons ?? this.abnormalReasons,
+      isSynced: isSynced ?? this.isSynced,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+    );
+  }
+
+  int? calculateDurationDays() {
+    if (endDate == null) return null;
+    return endDate!.difference(startDate).inDays + 1;
+  }
+}
+
+class EstrusPrediction {
+  EstrusPrediction({
+    required this.predictedDate,
+    required this.averageCycle,
+    required this.confidence,
+    required this.predictionBasis,
+    required this.message,
+    this.averageDuration,
+  });
+
+  final DateTime predictedDate;
+  final int averageCycle;
+  final PredictionConfidence confidence;
+  final PredictionBasis predictionBasis;
+  final String message;
+  final int? averageDuration;
+
+  factory EstrusPrediction.fromJson(Map<String, dynamic> json) => EstrusPrediction(
+        predictedDate: DateTime.parse(json['predictedDate'] as String? ?? json['predicted_date'] as String),
+        averageCycle: json['averageCycle'] as int? ?? json['average_cycle'] as int? ?? 180,
+        confidence: PredictionConfidence.values.firstWhere(
+          (e) => e.name == (json['confidence'] as String? ?? 'low'),
+          orElse: () => PredictionConfidence.low,
+        ),
+        predictionBasis: PredictionBasis.values.firstWhere(
+          (e) => e.name == (json['predictionBasis'] as String? ?? json['prediction_basis'] as String? ?? 'defaultValue'),
+          orElse: () => PredictionBasis.defaultValue,
+        ),
+        message: json['message'] as String? ?? '',
+        averageDuration: json['averageDuration'] as int? ?? json['average_duration'] as int?,
+      );
+
+  Map<String, dynamic> toJson() => {
+        'predictedDate': predictedDate.toIso8601String(),
+        'averageCycle': averageCycle,
+        'confidence': confidence.name,
+        'predictionBasis': predictionBasis.name,
+        'message': message,
+        'averageDuration': averageDuration,
+      };
+
+  int get daysUntilNext => predictedDate.difference(DateTime.now()).inDays;
+
+  DateTime get predictedEndDate => predictedDate.add(Duration(days: averageDuration ?? 18));
+}

@@ -86,5 +86,168 @@
   "typeBath": "洗澡",
   "typeWeight": "体重",
   "upcomingReminders": "近期待办提醒",
-  "upcomingNoData": "近期没有需要处理的待办事项哦~"
+  "upcomingNoData": "近期没有需要处理的待办事项哦~",
+  "estrus": "生理期",
+  "estrusRecord": "生理期记录",
+  "estrusCalendar": "生理期日历",
+  "estrusPrediction": "周期预测",
+  "estrusStartDate": "开始日期",
+  "estrusEndDate": "结束日期",
+  "estrusDurationDays": "持续天数",
+  "estrusNextPrediction": "预计下次生理期",
+  "estrusDaysUntilNext": "距离下次还有 {days} 天",
+  "@estrusDaysUntilNext": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "estrusBehaviorChanges": "行为变化",
+  "estrusSymptoms": "症状",
+  "estrusDischargeColor": "分泌物颜色",
+  "estrusDischargeAmount": "分泌物量",
+  "estrusVulvaSwelling": "外阴肿胀",
+  "estrusProestrus": "前情期",
+  "estrusEstrus": "情期",
+  "estrusDiestrus": "后情期",
+  "estrusAnestrus": "休情期",
+  "estrusPredictionConfidenceLow": "数据不足，预测准确度较低",
+  "estrusPredictionConfidenceMedium": "预测准确度中等",
+  "estrusPredictionConfidenceHigh": "预测准确度较高",
+  "estrusReminder": "生理期提醒",
+  "estrusComingSoon": "{petName}的生理期预计将在{days}天后开始",
+  "@estrusComingSoon": {
+    "placeholders": {
+      "petName": {
+        "type": "String"
+      },
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "estrusStarted": "{petName}的生理期预计今天开始",
+  "@estrusStarted": {
+    "placeholders": {
+      "petName": {
+        "type": "String"
+      }
+    }
+  },
+  "estrusShouldEnd": "{petName}的生理期应该已经结束",
+  "@estrusShouldEnd": {
+    "placeholders": {
+      "petName": {
+        "type": "String"
+      }
+    }
+  },
+  "estrusOverdue": "{petName}的生理期已超期",
+  "@estrusOverdue": {
+    "placeholders": {
+      "petName": {
+        "type": "String"
+      }
+    }
+  },
+  "estrusFirstRecordTitle": "记录生理期",
+  "estrusFirstRecordQuestion": "这是{petName}第一次生理期吗？",
+  "@estrusFirstRecordQuestion": {
+    "placeholders": {
+      "petName": {
+        "type": "String"
+      }
+    }
+  },
+  "estrusFirstTimeOption": "是的，这是第一次",
+  "estrusFirstTimeHint": "将基于平均周期预测下次生理期",
+  "estrusNotFirstTimeOption": "不是，之前有过生理期",
+  "estrusNotFirstTimeHint": "可补充历史记录以提高预测准确度",
+  "estrusHistoryInputTitle": "补充历史记录",
+  "estrusHistoryInputHint": "最多可补充3条历史记录",
+  "estrusAddMoreRecords": "添加更多记录",
+  "estrusSkipAndContinue": "跳过",
+  "estrusSaveAndContinue": "保存并继续",
+  "estrusPredictionBasisDefault": "基于平均周期预测",
+  "estrusPredictionBasisHistorical": "基于历史记录预测",
+  "estrusPredictionAccuracyLow": "准确度较低",
+  "estrusContinueRecordingHint": "继续记录可提高预测准确度",
+  "estrusRecordSaved": "已记录生理期",
+  "estrusKnowledgeTitle": "生理期知识小课堂",
+  "estrusHowToIdentify": "如何识别生理期？",
+  "estrusSwellingRedness": "外阴肿胀发红",
+  "estrusBloodyDischarge": "血性分泌物",
+  "estrusBehaviorChangesHint": "行为变化（如频繁舔舐）",
+  "estrusTipsTitle": "小贴士：",
+  "estrusRecordDates": "记录开始日期和结束日期",
+  "estrusObserveDischarge": "注意观察分泌物颜色和量",
+  "estrusKeepClean": "保持清洁，避免感染",
+  "estrusSkip": "跳过",
+  "estrusStartRecording": "开始记录",
+  "estrusAbnormalTitle": "异常标记",
+  "estrusAbnormalReasons": "异常原因",
+  "estrusProFeature": "Pro专属功能",
+  "estrusCloudBackup": "云备份与恢复",
+  "estrusNoRecords": "暂无生理期记录",
+  "estrusAddRecord": "添加记录",
+  "estrusEditRecord": "编辑记录",
+  "estrusDeleteRecord": "删除记录",
+  "estrusDeleteConfirm": "确定要删除这条生理期记录吗？",
+  "estrusDays": "{days}天",
+  "@estrusDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "estrusPhase": "周期阶段",
+  "estrusNote": "备注",
+  "estrusLight": "少量",
+  "estrusModerate": "中等",
+  "estrusHeavy": "大量",
+  "estrusSwellingNone": "无",
+  "estrusSwellingMild": "轻度",
+  "estrusSwellingModerate": "中度",
+  "estrusSwellingSevere": "重度",
+  "estrusColorPink": "粉红",
+  "estrusColorBrightRed": "鲜红",
+  "estrusColorDarkRed": "暗红",
+  "estrusColorLightYellow": "淡黄",
+  "estrusColorTransparent": "透明",
+  "estrusBehaviorRestless": "烦躁不安",
+  "estrusBehaviorDepressed": "情绪低落",
+  "estrusBehaviorClingy": "更加粘人",
+  "estrusBehaviorAppetiteLoss": "食欲下降",
+  "estrusBehaviorFrequentUrination": "频繁排尿",
+  "estrusBehaviorLicking": "舔舐外阴",
+  "estrusBehaviorSeekingMate": "寻找配偶",
+  "estrusBehaviorAggressive": "攻击性增强",
+  "estrusBehaviorLessActive": "活动减少",
+  "estrusBehaviorOther": "其他",
+  "estrusSymptomSwelling": "外阴肿胀",
+  "estrusSymptomBreastEnlargement": "乳房胀大",
+  "estrusSymptomFever": "体温升高",
+  "estrusSymptomIncreasedThirst": "饮水量增加",
+  "estrusSymptomOther": "其他",
+  "estrusStatsTitle": "生理期统计",
+  "estrusCycleTrend": "周期长度趋势",
+  "estrusDurationDistribution": "持续天数分布",
+  "estrusSymptomStats": "症状统计",
+  "estrusAverageCycle": "平均周期",
+  "estrusAverageDuration": "平均持续",
+  "estrusTotalRecords": "总记录数: {count}",
+  "@estrusTotalRecords": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "estrusInProgress": "进行中",
+  "estrusEnded": "已结束",
+  "estrusPredicted": "预测中",
+  "estrusOnlyFemalePets": "仅限母宠使用",
+  "estrusOnlyUnspayedPets": "仅限未绝育宠物使用"
 }
